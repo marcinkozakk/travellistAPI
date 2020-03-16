@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Http\Resources\Me as UserResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends BaseController
+class AuthController extends BaseController
 {
     /**
      * Register api
@@ -18,9 +19,10 @@ class RegisterController extends BaseController
     public function register(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|unique:users|max:255',
+            'email' => 'required|email|unique:users|max:255',
+            'password' => 'required|string',
             'c_password' => 'required|same:password',
         ]);
 
@@ -31,10 +33,11 @@ class RegisterController extends BaseController
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
-        $success['token'] =  $user->createToken('Travellist')->accessToken;
-        $success['name'] =  $user->name;
+        $token = $user->createToken('Travellist')->accessToken;
 
-        return $this->sendResponse($success, 'User register successfully.');
+        return $this->sendResponse(
+            (new UserResource($user))->additional(['token' => $token]),
+            'User register successfully.');
     }
 
     /**
@@ -46,10 +49,11 @@ class RegisterController extends BaseController
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
-            $success['token'] =  $user->createToken('Travellist')-> accessToken;
-            $success['name'] =  $user->name;
+            $token = $user->createToken('Travellist')->accessToken;
 
-            return $this->sendResponse($success, 'User login successfully.');
+            return $this->sendResponse(
+                (new UserResource($user))->additional(['token' => $token]),
+                'User login successfully.');
         }
         else{
             return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);

@@ -13,9 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::post('register', 'RegisterController@register');
-Route::post('login', 'RegisterController@login');
+Route::post('register', 'AuthController@register');
+Route::post('login', 'AuthController@login');
 
 Route::middleware('auth:api')->group( function () {
+    Route::resource('users', 'UsersController')
+        ->only(['show']);
     //Route::resource('products', 'API\ProductController');
 });
