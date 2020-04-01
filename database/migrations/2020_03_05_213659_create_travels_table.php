@@ -17,8 +17,12 @@ class CreateTravelsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->date('start_date');
-            $table->date('end_time')->nullable();
+            $table->date('end_date')->nullable();
             $table->timestamps();
+
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
