@@ -19,5 +19,18 @@ Route::post('login', 'AuthController@login');
 Route::middleware('auth:api')->group( function () {
     Route::resource('users', 'UsersController')
         ->only(['show']);
-    //Route::resource('products', 'API\ProductController');
+
+    Route::resource('travels', 'TravelsController')
+        ->only(['store', 'show', 'update', 'destroy']);
+
+    Route::resource('notes', 'NotesController')
+        ->only(['update', 'destroy']);
+    Route::post('/notes/{travel_id}', 'NotesController@store');
+
+    Route::resource('photos', 'PhotosController')
+        ->only(['update', 'destroy']);
+    Route::post('/photos/{travel_id}', 'PhotosController@store');
+
+    Route::resource('follows', 'FollowsController')
+        ->only(['index', 'store', 'destroy']);
 });

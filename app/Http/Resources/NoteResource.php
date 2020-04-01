@@ -2,14 +2,15 @@
 
 namespace App\Http\Resources;
 
+use App\Note;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Class User
+ * Class NoteResource
  * @package App\Http\Resources
- * @mixin \App\User
+ * @mixin Note
  */
-class User extends JsonResource
+class NoteResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -21,10 +22,12 @@ class User extends JsonResource
     {
         return [
             'id' => $this->id,
-            'name' => $this->name,
-            'username' => $this->username,
-            'createdAt' => $this->created_at,
-            'updatedAt' => $this->updated_at,
+            'title' => $this->title,
+            'note' => $this->note,
+            'date' => $this->date,
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'travel_id' => $this->travel_id
         ];
     }
 }

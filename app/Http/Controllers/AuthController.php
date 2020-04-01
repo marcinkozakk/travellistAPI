@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
-use App\Http\Resources\Me as UserResource;
+use App\Http\Resources\MeResource;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -36,7 +36,7 @@ class AuthController extends BaseController
         $token = $user->createToken('Travellist')->accessToken;
 
         return $this->sendResponse(
-            (new UserResource($user))->additional(['token' => $token]),
+            (new MeResource($user))->additional(['token' => $token]),
             'User register successfully.');
     }
 
@@ -52,7 +52,7 @@ class AuthController extends BaseController
             $token = $user->createToken('Travellist')->accessToken;
 
             return $this->sendResponse(
-                (new UserResource($user))->additional(['token' => $token]),
+                (new MeResource($user))->additional(['token' => $token]),
                 'User login successfully.');
         }
         else{
