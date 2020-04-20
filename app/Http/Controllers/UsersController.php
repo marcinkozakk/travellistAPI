@@ -24,10 +24,10 @@ class UsersController extends BaseController
 
     public function search(Request $request)
     {
-        return UserResource::collection(
+        return $this->sendResponse(UserResource::collection(
             User::where('username', 'like', $request->username . '%')
                 ->take(8)
                 ->get()
-        );
+        ), 'List of found users');
     }
 }
