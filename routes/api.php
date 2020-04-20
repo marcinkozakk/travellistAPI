@@ -17,6 +17,7 @@ Route::post('register', 'AuthController@register');
 Route::post('login', 'AuthController@login');
 
 Route::middleware('auth:api')->group( function () {
+    Route::get('/users/search', 'UsersController@search');
     Route::resource('users', 'UsersController')
         ->only(['show']);
 
