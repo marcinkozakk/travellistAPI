@@ -36,4 +36,8 @@ Route::middleware('auth:api')->group( function () {
 
     Route::resource('follows', 'FollowsController')
         ->only(['index', 'show', 'store', 'destroy']);
+
+    Route::resource('likes', 'LikesController')
+        ->only(['store', 'destroy']);
+
 });

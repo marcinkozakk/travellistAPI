@@ -26,7 +26,9 @@ class TravelListResource extends JsonResource
             'title' => $this->title,
             'user_id' => $this->user_id,
             'username' => $this->user->username,
-            'main_photo' => Config::get('app.url') . Storage::url($this->mainPhoto->path)
+            'main_photo' => !is_null($this->photo_id) ? Config::get('app.url') . Storage::url($this->mainPhoto->path) : null,
+            'likes_count' => $this->likes()->count(),
+            'is_liked' => $this->likes()->where(['user_id' => \Auth::id()])->exists()
         ];
     }
 }

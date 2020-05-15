@@ -59,7 +59,7 @@ class FollowsController extends BaseController
             'following_id' => 'required',
         ]);
 
-        if($validator->fails()){
+        if($validator->fails()) {
             return $this->sendError('Validation Error.', $validator->errors());
         }
 

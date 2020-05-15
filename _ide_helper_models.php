@@ -49,6 +49,8 @@ namespace App{
  * @property int $user_id
  * @property int|null $photo_id
  * @property-read mixed $photos_and_notes
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
+ * @property-read int|null $likes_count
  * @property-read \App\Photo $mainPhoto
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
  * @property-read int|null $notes_count
@@ -130,6 +132,27 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User whereUsername($value)
  */
 	class User extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\Like
+ *
+ * @property int $id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $user_id
+ * @property int $travel_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Like newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Like newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Like query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Like whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Like whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Like whereTravelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Like whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Like whereUserId($value)
+ */
+	class Like extends \Eloquent {}
 }
 
 namespace App{

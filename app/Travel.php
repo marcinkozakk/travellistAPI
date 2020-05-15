@@ -44,12 +44,17 @@ class Travel extends Model
 
     public function mainPhoto()
     {
-        return $this->hasOne(Photo::class);
+        return $this->belongsTo(Photo::class, 'photo_id', 'id');
     }
 
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
     }
 
     public function getPhotosAndNotesAttribute()
