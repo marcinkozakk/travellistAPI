@@ -21,6 +21,8 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('users', 'UsersController')
         ->only(['show']);
 
+    Route::get('travels/{type}/{id?}', 'TravelsController@index')
+    ->where(['type' => 'home|my|user']);
     Route::resource('travels', 'TravelsController')
         ->only(['store', 'show', 'update', 'destroy']);
 
@@ -33,5 +35,5 @@ Route::middleware('auth:api')->group( function () {
     Route::post('/photos/{travel_id}', 'PhotosController@store');
 
     Route::resource('follows', 'FollowsController')
-        ->only(['index', 'store', 'destroy']);
+        ->only(['index', 'show', 'store', 'destroy']);
 });

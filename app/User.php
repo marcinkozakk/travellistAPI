@@ -46,4 +46,9 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class, 'follows', 'follower_id', 'following_id');
     }
+
+    public function travels()
+    {
+        return $this->hasMany(Travel::class)->orderByDesc('created_at');
+    }
 }

@@ -47,6 +47,11 @@ class Travel extends Model
         return $this->hasOne(Photo::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function getPhotosAndNotesAttribute()
     {
         $photos = collect($this->photos);

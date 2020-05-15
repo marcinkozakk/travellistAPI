@@ -3,13 +3,15 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * Class Travel
  * @package App\Http\Resources
  * @mixin \App\Travel
  */
-class TravelResource extends JsonResource
+class TravelListResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,13 +24,9 @@ class TravelResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'start_date' => $this->start_date,
-            'end_date' => $this->end_date,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'user_id' => $this->user_id,
-            'main_photo' => new PhotoResource($this->mainPhoto),
-            'photos&notes' => PhotosAndNotesResource::collection($this->photos_and_notes)
+            'username' => $this->user->username,
+            'main_photo' => Config::get('app.url') . Storage::url($this->mainPhoto->path)
         ];
     }
 }

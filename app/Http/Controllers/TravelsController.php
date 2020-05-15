@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TravelListResource;
 use App\Photo;
 use App\Travel;
 use App\Http\Resources\TravelResource;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -14,11 +16,21 @@ class TravelsController extends BaseController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index($type, $id = null)
     {
-        //
+        if($type == 'home') {
+            $resource = $this->getFollowingTravels();
+        } else if($type == 'my') {
+            $resource = $this->getUserTravels(Auth::user());
+        } else {
+            $resource = $this->getUserTravels(User::find($id));
+        }
+
+        return $this->sendResponse(
+            TravelListResource::collection($resource)
+        );
     }
 
     /**
@@ -133,5 +145,22 @@ class TravelsController extends BaseController
             new TravelResource($travel),
             'Travel deleted successfully'
         );
+    }
+
+    /**
+     * @return Travel[]|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Query\Builder[]|\Illuminate\Support\Collection
+     */
+    private function getFollowingTravels()
+    {
+        return Travel::whereIn('user_id', Auth::user()->following->pluck('id'))
+            ->orderByDesc('created_at')->get();
+    }
+
+    /**
+     * @param User $user
+     */
+    private function getUserTravels($user)
+    {
+        return $user->travels;
     }
 }

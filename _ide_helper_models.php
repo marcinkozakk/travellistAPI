@@ -54,6 +54,7 @@ namespace App{
  * @property-read int|null $notes_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Photo[] $photos
  * @property-read int|null $photos_count
+ * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Travel newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Travel newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Travel query()
@@ -113,6 +114,8 @@ namespace App{
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  * @property-read int|null $tokens_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Travel[] $travels
+ * @property-read int|null $travels_count
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\User query()

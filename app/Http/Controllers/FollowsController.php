@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Follow;
 use App\Http\Resources\FollowResource;
 use App\Http\Resources\UserResource;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -25,6 +26,27 @@ class FollowsController extends BaseController
             ]
         );
     }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse|void
+     */
+    public function show($id)
+    {
+        $user = User::find($id);
+
+        if(!empty($user)) {
+            return $this->sendResponse(
+                [
+                    'followers' => UserResource::collection($user->followers),
+                    'following' => UserResource::collection($user->following)
+                ]
+            );
+        } else {
+            return $this->sendError('User not found');
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *
