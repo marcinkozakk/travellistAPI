@@ -63,6 +63,10 @@ class FollowsController extends BaseController
             return $this->sendError('Validation Error.', $validator->errors());
         }
 
+        if($request->following_id == Auth::id()) {
+            return $this->sendError('You can\'t follow yourself!');
+        }
+
         $follow = Follow::firstOrCreate([
             'following_id' => $request->following_id,
             'follower_id' => Auth::id()
