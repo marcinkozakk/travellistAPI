@@ -81,11 +81,26 @@ class FollowsController extends BaseController
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Exception
      */
     public function destroy($id)
     {
-        //
+        $follow = Follow::where([
+            'follower_id' => Auth::id(),
+            'following_id' => $id
+        ])->first();
+
+        if(is_null($follow)) {
+            return $this->sendError('You aren\'t following this user!');
+        }
+
+        $follow->delete();
+
+        return $this->sendResponse(
+            'success',
+            'User unfollowed successfully'
+        );
     }
 }
