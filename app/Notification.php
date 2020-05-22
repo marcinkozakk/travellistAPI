@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Follow extends Model
+class Notification extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,13 +13,7 @@ class Follow extends Model
      */
 
     protected $fillable = [
-        'following_id', 'follower_id'
+        'body', 'user_id', 'concerns_user_id'
     ];
-
-
-    public function follower()
-    {
-        return $this->belongsTo(User::class, 'follower_id');
-    }
 
 }

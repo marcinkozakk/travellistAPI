@@ -51,7 +51,7 @@ namespace App{
  * @property-read mixed $photos_and_notes
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
  * @property-read int|null $likes_count
- * @property-read \App\Photo $mainPhoto
+ * @property-read \App\Photo|null $mainPhoto
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
  * @property-read int|null $notes_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Photo[] $photos
@@ -81,6 +81,7 @@ namespace App{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $following_id
  * @property int $follower_id
+ * @property-read \App\User $follower
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Follow newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Follow newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Follow query()
@@ -112,7 +113,7 @@ namespace App{
  * @property-read int|null $followers_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[] $following
  * @property-read int|null $following_count
- * @property-read \Illuminate\Notifications\DatabaseNotificationCollection|\Illuminate\Notifications\DatabaseNotification[] $notifications
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Notification[] $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  * @property-read int|null $tokens_count
@@ -143,6 +144,8 @@ namespace App{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $user_id
  * @property int $travel_id
+ * @property-read \App\Travel $travel
+ * @property-read \App\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Like newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Like newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Like query()
@@ -179,5 +182,30 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Photo whereUpdatedAt($value)
  */
 	class Photo extends \Eloquent {}
+}
+
+namespace App{
+/**
+ * App\Notification
+ *
+ * @property int $id
+ * @property string $body
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $user_id
+ * @property int $concerns_user_id
+ * @property int|null $travel_id
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification whereBody($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification whereConcernsUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification whereTravelId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Notification whereUserId($value)
+ */
+	class Notification extends \Eloquent {}
 }
 

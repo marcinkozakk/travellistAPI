@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Travel::class)->orderByDesc('created_at');
     }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class, 'concerns_user_id');
+    }
 }

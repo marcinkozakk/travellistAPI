@@ -40,4 +40,6 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('likes', 'LikesController')
         ->only(['store', 'destroy']);
 
+    Route::resource('notifications', 'NotificationsController')
+        ->only(['index']);
 });
