@@ -18,6 +18,7 @@ class LikeObserver
         Notification::create([
             'body' => $like->user->username . ' liked your travel ' . $like->travel->title,
             'user_id' => $like->user_id,
+            'travel_id' => $like->travel_id,
             'concerns_user_id' => $like->travel->user_id
         ]);
 
@@ -34,7 +35,8 @@ class LikeObserver
     {
         $notification = Notification::where([
             'user_id' => $like->user_id,
-            'concerns_user_id' => $like->travel->user_id
+            'concerns_user_id' => $like->travel->user_id,
+            'travel_id' => $like->travel_id
         ])->first();
 
         if(!is_null($notification)) {

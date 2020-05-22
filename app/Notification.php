@@ -13,7 +13,7 @@ class Notification extends Model
      */
 
     protected $fillable = [
-        'body', 'user_id', 'concerns_user_id'
+        'body', 'user_id', 'concerns_user_id', 'travel_id'
     ];
 
 }
