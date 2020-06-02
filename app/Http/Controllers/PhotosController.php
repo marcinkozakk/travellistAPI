@@ -103,6 +103,11 @@ class PhotosController extends BaseController
 
         $this->authorize('owner', $photo->travel);
 
+        if($photo->travel->photo_id == $id) {
+            $photo->travel->photo_id = null;
+            $photo->travel->save();
+        }
+
         $photo->delete();
 
         return $this->sendResponse(
