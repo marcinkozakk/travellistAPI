@@ -136,6 +136,8 @@ class TravelsController extends BaseController
         $this->authorize('owner', $travel);
 
         $travel->notes()->delete();
+        $travel->likes()->delete();
+        $travel->notifications()->delete();
         foreach ($travel->photos as $photo) {
             $photo->delete();
         }

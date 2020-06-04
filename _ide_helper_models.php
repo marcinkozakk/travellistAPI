@@ -54,6 +54,8 @@ namespace App{
  * @property-read \App\Photo|null $mainPhoto
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
  * @property-read int|null $notes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Notification[] $notifications
+ * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Photo[] $photos
  * @property-read int|null $photos_count
  * @property-read \App\User $user

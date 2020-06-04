@@ -57,6 +57,11 @@ class Travel extends Model
         return $this->hasMany(Like::class);
     }
 
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
+    }
+
     public function getPhotosAndNotesAttribute()
     {
         $photos = collect($this->photos);
