@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNotesTable extends Migration
+class CreateLocationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,12 @@ class CreateNotesTable extends Migration
      */
     public function up()
     {
-        Schema::create('notes', function (Blueprint $table) {
+        Schema::create('locations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('title')->nullable();
-            $table->string('note');
-            $table->date('date');
+            $table->decimal('lat', 10, 6);
+            $table->decimal('lng', 11, 6);
+            $table->string('country');
             $table->timestamps();
-
-            $table->unsignedBigInteger('travel_id');
-
-            $table->foreign('travel_id')->references('id')->on('travels');
         });
     }
 
@@ -33,6 +29,6 @@ class CreateNotesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('note');
+        Schema::dropIfExists('locations');
     }
 }

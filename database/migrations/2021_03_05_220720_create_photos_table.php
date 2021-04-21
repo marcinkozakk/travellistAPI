@@ -21,8 +21,10 @@ class CreatePhotosTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('travel_id');
+            $table->unsignedBigInteger('location_id');
 
             $table->foreign('travel_id')->references('id')->on('travels');
+            $table->foreign('location_id')->references('id')->on('locations');
         });
     }
 
