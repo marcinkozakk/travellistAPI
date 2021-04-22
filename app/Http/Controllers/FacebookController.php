@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Resources\MeResource;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class FacebookController extends BaseController
