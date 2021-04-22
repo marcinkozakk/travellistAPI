@@ -13,7 +13,7 @@ class Note extends Model
      */
 
     protected $fillable = [
-        'title', 'note', 'date', 'travel_id'
+        'title', 'note', 'date', 'travel_id', 'location_id'
     ];
 
     /**
@@ -31,6 +31,12 @@ class Note extends Model
 
     public function travel()
     {
-        return$this->belongsTo(Travel::class);
+        return $this->belongsTo(Travel::class);
     }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
+    }
+
 }

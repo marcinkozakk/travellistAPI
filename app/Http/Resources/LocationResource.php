@@ -2,15 +2,15 @@
 
 namespace App\Http\Resources;
 
-use App\Note;
+use App\Location;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 /**
- * Class NoteResource
+ * Class LocationResource
  * @package App\Http\Resources
- * @mixin Note
+ * @mixin Location
  */
-class NoteResource extends JsonResource
+class LocationResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -22,15 +22,11 @@ class NoteResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'note' => $this->note,
-            'date' => $this->date,
+            'lat' => $this->lat,
+            'lng' => $this->lng,
+            'country' => $this->country,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'travel_id' => $this->travel_id,
-            'location' => !is_null($this->location_id) ?
-                new LocationResource($this->location) :
-                null
         ];
     }
 }

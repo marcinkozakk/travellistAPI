@@ -30,6 +30,9 @@ class PhotoResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
             'travel_id' => $this->travel_id,
+            'location' => !is_null($this->location_id) ?
+                new LocationResource($this->location) :
+                null
         ];
     }
 }

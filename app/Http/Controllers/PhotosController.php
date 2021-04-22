@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\PhotoResource;
+use App\Location;
 use App\Photo;
 use App\Travel;
 use Illuminate\Http\Request;
@@ -29,7 +30,10 @@ class PhotosController extends BaseController
         $validator = Validator::make($request->all(), [
             'title' => 'nullable|string|max:255',
             'date' => 'required|date',
-            'photo' => 'required|image'
+            'photo' => 'required|image',
+            'location.lat' => 'required_with_all:location.lng,location.country|numeric|between:-90,90',
+            'location.lng' => 'required_with_all:location.lat,location.country|numeric|between:-180,180',
+            'location.country' => 'nullable|string|max:255'
         ]);
 
         if($validator->fails()){
@@ -37,6 +41,12 @@ class PhotosController extends BaseController
         }
 
         $input = $request->all();
+
+        if($request->has('location.lat')) {
+            $location = Location::create($request->input('location'));
+            $input['location_id'] = $location->id;
+        }
+
         $input['path'] = $request->file('photo')->store($this->storePath);
         $input['travel_id'] = $travel_id;
 
@@ -63,7 +73,10 @@ class PhotosController extends BaseController
         $validator = Validator::make($request->all(), [
             'title' => 'nullable|string|max:255',
             'date' => 'nullable|date',
-            'photo' => 'nullable|image'
+            'photo' => 'nullable|image',
+            'location.lat' => 'nullable|required_with_all:location.lng,location.country|numeric|between:-90,90',
+            'location.lng' => 'nullable|required_with_all:location.lat,location.country|numeric|between:-180,180',
+            'location.country' => 'nullable|string|max:255'
         ]);
 
         if($validator->fails()){
@@ -71,6 +84,13 @@ class PhotosController extends BaseController
         }
 
         $input = $request->all();
+
+        if($request->has('location.lat')) {
+            $location = Location::findOrNew($photo->location_id);
+            $location->fill($request->input('location'));
+            $location->save();
+            $input['location_id'] = $location->id;
+        }
 
         if($request->has('photo')) {
             Storage::delete($photo->path);

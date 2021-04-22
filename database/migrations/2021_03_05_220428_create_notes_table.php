@@ -21,7 +21,7 @@ class CreateNotesTable extends Migration
             $table->timestamps();
 
             $table->unsignedBigInteger('travel_id');
-            $table->unsignedBigInteger('location_id');
+            $table->unsignedBigInteger('location_id')->nullable();
 
             $table->foreign('travel_id')->references('id')->on('travels');
             $table->foreign('location_id')->references('id')->on('locations');

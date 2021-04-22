@@ -13,7 +13,7 @@ class Photo extends Model
      */
 
     protected $fillable = [
-        'title', 'path', 'date', 'travel_id'
+        'title', 'path', 'date', 'travel_id', 'location_id'
     ];
 
     /**
@@ -32,6 +32,11 @@ class Photo extends Model
     public function travel()
     {
         return $this->belongsTo(Travel::class);
+    }
+
+    public function location()
+    {
+        return $this->belongsTo(Location::class);
     }
 
 }
