@@ -128,6 +128,10 @@ class PhotosController extends BaseController
             $photo->travel->save();
         }
 
+        if(!is_null($photo->location)) {
+            $photo->location->delete();
+        }
+
         $photo->delete();
 
         return $this->sendResponse(
