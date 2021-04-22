@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Resources\MeResource;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Request;
 use Laravel\Socialite\Facades\Socialite;
 
 class FacebookController extends BaseController
@@ -33,7 +34,23 @@ class FacebookController extends BaseController
 
     }
 
-    public function findOrCreateUser($socialMediaUser)
+    public function loginWithToken(Request $request)
+    {
+        $socialMediaUser = Socialite::driver('facebook')->userFromToken($request->input('token'));
+
+        $user = $this->findOrCreateUser($socialMediaUser);
+        Auth::guard()->login($user);
+
+        $user = Auth::user();
+        $token = $user->createToken('Travellist')->accessToken;
+
+        return $this->sendResponse(
+            (new MeResource($user))->additional(['token' => $token]),
+            'User login successfully.');
+    }
+
+
+    function findOrCreateUser($socialMediaUser)
     {
         $user = User::where('facebook_id', $socialMediaUser->getId())->first();
         if(!is_null($user)) {
