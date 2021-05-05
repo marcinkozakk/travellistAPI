@@ -23,8 +23,13 @@ class CreatePhotosTable extends Migration
             $table->unsignedBigInteger('travel_id');
             $table->unsignedBigInteger('location_id')->nullable();
 
-            $table->foreign('travel_id')->references('id')->on('travels');
-            $table->foreign('location_id')->references('id')->on('locations');
+            $table->foreign('travel_id')
+                ->references('id')
+                ->on('travels');
+            $table->foreign('location_id')
+                ->references('id')
+                ->on('locations')
+                ->onDelete('set null');
         });
     }
 
