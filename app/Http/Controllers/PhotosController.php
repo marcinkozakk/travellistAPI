@@ -128,7 +128,7 @@ class PhotosController extends BaseController
             $photo->travel->save();
         }
 
-        if(!is_null($photo->location)) {
+        if(!is_null($photo->location_id)) {
             $photo->location->delete();
         }
 

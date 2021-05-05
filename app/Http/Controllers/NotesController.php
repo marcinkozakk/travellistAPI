@@ -112,7 +112,7 @@ class NotesController extends BaseController
 
         $this->authorize('owner', $note->travel);
 
-        if(!is_null($note->location)) {
+        if(!is_null($note->location_id)) {
             $note->location->delete();
         }
 
