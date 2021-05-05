@@ -138,6 +138,9 @@ class TravelsController extends BaseController
         $travel->notes()->delete();
         $travel->likes()->delete();
         $travel->notifications()->delete();
+        if(empty($travel->photo_id)) {
+            $travel->update(['photo_id' => null]);
+        }
         foreach ($travel->photos as $photo) {
             $photo->delete();
         }
