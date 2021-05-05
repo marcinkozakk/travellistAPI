@@ -67,6 +67,6 @@ class Travel extends Model
         $photos = collect($this->photos);
         $notes = collect($this->notes);
 
-        return $photos->merge($notes)->sortBy('date');
+        return $photos->merge($notes)->sortBy('created_at');
     }
 }
