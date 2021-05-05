@@ -129,7 +129,7 @@ class PhotosController extends BaseController
         }
 
         if(!is_null($photo->location_id)) {
-            $photo->location->delete();
+            $photo->location()->delete();
         }
 
         $photo->delete();
