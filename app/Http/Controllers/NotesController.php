@@ -71,8 +71,8 @@ class NotesController extends BaseController
             'title' => 'nullable|string|max:255',
             'note' => 'nullable|string|max:255',
             'date' => 'nullable|date',
-            'location.lat' => 'required_with_all:location.lng,location.country|numeric|between:-90,90',
-            'location.lng' => 'required_with_all:location.lat,location.country|numeric|between:-180,180',
+            'location.lat' => 'nullable|required_with_all:location.lng,location.country|numeric|between:-90,90',
+            'location.lng' => 'nullable|required_with_all:location.lat,location.country|numeric|between:-180,180',
             'location.country' => 'nullable|string|max:255'
         ]);
 
