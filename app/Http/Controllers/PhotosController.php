@@ -92,8 +92,7 @@ class PhotosController extends BaseController
             $input['location_id'] = $location->id;
         }
 
-        if($request->has('photo')) {
-            Storage::delete($photo->path);
+        if($request->file('photo') !== null) {
             $input['path'] = $request->file('photo')->store($this->storePath);
         } else {
             $input['path'] = $photo->path;
