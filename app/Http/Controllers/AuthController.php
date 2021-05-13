@@ -34,6 +34,7 @@ class AuthController extends BaseController
         $input['password'] = Hash::make($input['password']);
         $user = User::create($input);
         $token = $user->createToken('Travellist')->accessToken;
+        $user->sendEmailVerificationNotification();
 
         return $this->sendResponse(
             (new MeResource($user))->additional(['token' => $token]),

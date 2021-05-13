@@ -11,8 +11,13 @@
 |
 */
 
+Route::emailVerification();
+
 Route::get('/', function () {
     return view('welcome');
+});
+Route::get('/activated', function () {
+    return view('activated');
 });
 
 Route::get('facebook/redirect', 'FacebookController@redirect');
