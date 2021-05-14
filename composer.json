@@ -13,7 +13,9 @@
         "laravel/framework": "^6.2",
         "laravel/passport": "^8.4",
         "laravel/socialite": "^5.2",
-        "laravel/tinker": "^2.0"
+        "laravel/tinker": "^2.0",
+        "ext-json": "*",
+        "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.6",

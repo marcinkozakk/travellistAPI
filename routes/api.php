@@ -42,4 +42,6 @@ Route::middleware('auth:api')->group( function () {
 
     Route::resource('notifications', 'NotificationsController')
         ->only(['index']);
+    Route::post('/notifications/registerDevice', 'NotificationsController@registerDevice');
+
 });

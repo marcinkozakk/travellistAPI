@@ -35,4 +35,8 @@ return [
         'client_secret' => env('FACEBOOK_APP_SECRET'),
         'redirect' => env('FACEBOOK_REDIRECT'),
     ],
+
+    'fcm' => [
+        'server_key' => env('FCM_SERVER_KEY')
+    ]
 ];
