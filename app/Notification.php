@@ -26,10 +26,10 @@ class Notification extends Model
         }
 
         $data = [
-            "registration_ids" => $user->device_key,
-            "data" => [
+            "to" => $user->device_key,
+            "notification" => [
                 'title' => $this->body,
-                'body' => $this->body
+                'text' => $this->body
             ]
         ];
 
