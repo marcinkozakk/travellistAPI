@@ -40,7 +40,7 @@ class NotificationsController extends BaseController
 
         return $this->sendResponse(
             new UserResource($user),
-            'User device registered successfully' . $request->device_key
+            'User device registered successfully'
         );
     }
 

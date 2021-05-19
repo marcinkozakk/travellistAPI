@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Like;
 use App\Notification;
+use App\User;
 
 class LikeObserver
 {
@@ -15,6 +16,8 @@ class LikeObserver
      */
     public function created(Like $like)
     {
+        User::find($like->travel->user_id)->updateLikesCountStat();
+
         Notification::create([
             'body' => $like->user->username . ' liked your travel ' . $like->travel->title,
             'user_id' => $like->user_id,
@@ -33,6 +36,8 @@ class LikeObserver
      */
     public function deleted(Like $like)
     {
+        User::find($like->travel->user_id)->updateLikesCountStat();
+
         $notification = Notification::where([
             'user_id' => $like->user_id,
             'concerns_user_id' => $like->travel->user_id,
