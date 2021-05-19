@@ -163,6 +163,39 @@ namespace App{
 
 namespace App{
 /**
+ * App\Stat
+ *
+ * @property int $id
+ * @property int $countries_count
+ * @property int $travels_count
+ * @property int $photos_count
+ * @property int $notes_count
+ * @property int $likes_count
+ * @property int $favorite_travel
+ * @property int $total_travel_time
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $user_id
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereCountriesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereFavoriteTravel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereLikesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereNotesCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat wherePhotosCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereTotalTravelTime($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereTravelsCount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Stat whereUserId($value)
+ */
+	class Stat extends \Eloquent {}
+}
+
+namespace App{
+/**
  * App\Travel
  *
  * @property int $id
@@ -220,8 +253,15 @@ namespace App{
  * @property-read int|null $followers_count
  * @property-read \Illuminate\Database\Eloquent\Collection|User[] $following
  * @property-read int|null $following_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Like[] $likes
+ * @property-read int|null $likes_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Note[] $notes
+ * @property-read int|null $notes_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Notification[] $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Photo[] $photos
+ * @property-read int|null $photos_count
+ * @property-read \App\Stat $stat
  * @property-read \Illuminate\Database\Eloquent\Collection|\Laravel\Passport\Token[] $tokens
  * @property-read int|null $tokens_count
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Travel[] $travels

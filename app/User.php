@@ -57,4 +57,67 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Notification::class, 'concerns_user_id');
     }
+
+    public function stat()
+    {
+        return $this->hasOne(Stat::class)->withDefault();
+    }
+
+    public function notes()
+    {
+        return $this->hasManyThrough(Note::class, Travel::class);
+    }
+
+    public function photos()
+    {
+        return $this->hasManyThrough(Photo::class, Travel::class);
+    }
+
+    public function likes()
+    {
+        return $this->hasManyThrough(Like::class, Travel::class);
+    }
+
+    public function updateCountriesCountStat()
+    {
+        $notesCountries = $this->notes->load('location')->pluck('location.country')->unique();
+        $photosCountries = $this->photos->load('location')->pluck('location.country')->unique();
+
+        $this->stat->countries_count = $notesCountries->union($photosCountries)->count();
+        $this->stat->save();
+    }
+
+    public function updateTravelsCountStat()
+    {
+        $this->stat->travels_count = $this->travels->count();
+        $this->stat->save();
+    }
+
+    public function updatePhotosCountStat()
+    {
+        $this->stat->photos_count = $this->photos->count();
+        $this->stat->save();
+    }
+
+    public function updateNotesCountStat()
+    {
+        $this->stat->notes_count = $this->notes->count();
+        $this->stat->save();
+    }
+
+    public function updateLikesCountStat()
+    {
+        $this->stat->likes_count = $this->likes->count();
+        $this->stat->save();
+    }
+
+    public function updateTotalTravelTimeStat()
+    {
+        $days = $this->travels->map(function (Travel $travel) {
+            return $travel->start_date->diffInDays($travel->end_date);
+        })->sum();
+
+        $this->stat->total_travel_time = $days;
+        $this->stat->save();
+    }
 }
