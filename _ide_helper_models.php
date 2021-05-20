@@ -171,17 +171,16 @@ namespace App{
  * @property int $photos_count
  * @property int $notes_count
  * @property int $likes_count
- * @property int $favorite_travel
  * @property int $total_travel_time
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $user_id
+ * @property-read int $total_points
  * @method static \Illuminate\Database\Eloquent\Builder|Stat newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Stat newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Stat query()
  * @method static \Illuminate\Database\Eloquent\Builder|Stat whereCountriesCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stat whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Stat whereFavoriteTravel($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stat whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stat whereLikesCount($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Stat whereNotesCount($value)

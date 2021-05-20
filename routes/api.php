@@ -20,7 +20,7 @@ Route::middleware('auth:api')->group( function () {
     Route::get('/users/search', 'UsersController@search');
     Route::resource('users', 'UsersController')
         ->only(['show']);
-    Route::get('/users/{id?}/stats', 'UsersController@stats');
+    Route::get('/users/{target}/stats', 'UsersController@stats');
 
     Route::get('travels/{type}/{id?}', 'TravelsController@index')
     ->where(['type' => 'home|my|user']);

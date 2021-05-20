@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\UserResource;
+use App\Http\Resources\UserStatResource;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,12 +33,19 @@ class UsersController extends BaseController
         ), 'List of found users');
     }
 
-    public function stats($id)
+    public function stats($target)
     {
-        if($id === 'me') {
-            $stats = Auth::user()->stat;
+        if($target === 'me') {
+            $stats = new UserStatResource(Auth::user());
         } else {
-            $stats = User::findOrFail($id)->stat;
+            $stats = UserStatResource::collection(
+                Auth::user()
+                    ->following
+                    ->load('stat')
+                    ->collect()
+                    ->add(Auth::user()->load('stat'))
+                    ->sortByDesc('stat.totalPoints')
+            );
         }
 
         return $this->sendResponse($stats, 'User statistics');
