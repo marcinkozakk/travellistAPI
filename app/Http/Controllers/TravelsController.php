@@ -10,6 +10,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Mpdf\Mpdf;
 
 class TravelsController extends BaseController
 {
@@ -73,6 +74,23 @@ class TravelsController extends BaseController
             new TravelResource(Travel::findOrFail($id)),
             'Travel data'
         );
+    }
+
+    public function view($id)
+    {
+        return view('travel', [
+            'travel' => $travel = Travel::findOrFail($id),
+            'photosAndNotes' => $travel->photos_and_notes,
+            'likesCount' => $travel->likes()->count()
+        ]);
+    }
+
+    public function generate($id)
+    {
+        $pdf = new Mpdf();
+        $pdf->WriteHTML($this->view($id)->render());
+
+        return $pdf->Output();
     }
 
     /**

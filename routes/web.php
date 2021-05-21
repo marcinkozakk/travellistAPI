@@ -20,6 +20,9 @@ Route::get('/activated', function () {
     return view('activated');
 });
 
+Route::get('/travels/{id}', 'TravelsController@view');
+Route::get('/generate/{id}', 'TravelsController@generate');
+
 Route::get('facebook/redirect', 'FacebookController@redirect');
 Route::get('facebook/callback', 'FacebookController@callback');
 Route::get('facebook/loginWithToken', 'FacebookController@loginWithToken');
