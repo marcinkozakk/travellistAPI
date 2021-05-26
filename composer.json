@@ -13,6 +13,7 @@
         "ext-json": "*",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^6.2",
+        "laravel/horizon": "~3.0",
         "laravel/passport": "^8.4",
         "laravel/socialite": "^5.2",
         "laravel/tinker": "^2.0",

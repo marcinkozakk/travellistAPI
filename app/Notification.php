@@ -14,7 +14,7 @@ class Notification extends Model
      */
 
     protected $fillable = [
-        'body', 'user_id', 'concerns_user_id', 'travel_id'
+        'body', 'user_id', 'concerns_user_id', 'travel_id', 'path'
     ];
 
     public function sendPush()
@@ -26,12 +26,18 @@ class Notification extends Model
         }
 
         $data = [
-            "to" => $user->device_key,
-            "notification" => [
+            'to' => $user->device_key,
+            'notification' => [
                 'title' => $this->body,
                 'text' => $this->body
             ]
         ];
+
+        if(!is_null($this->path)) {
+            $data['data'] = [
+                'path' => $this->path
+            ];
+        }
 
         $dataString = json_encode($data);
 

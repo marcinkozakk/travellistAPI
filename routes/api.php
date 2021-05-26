@@ -26,6 +26,7 @@ Route::middleware('auth:api')->group( function () {
     ->where(['type' => 'home|my|user']);
     Route::resource('travels', 'TravelsController')
         ->only(['store', 'show', 'update', 'destroy']);
+    Route::get('/generate/{id}', 'TravelsController@generate');
 
     Route::resource('notes', 'NotesController')
         ->only(['update', 'destroy']);

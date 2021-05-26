@@ -118,6 +118,7 @@ namespace App{
  * @property int $user_id
  * @property int $concerns_user_id
  * @property int|null $travel_id
+ * @property string|null $path
  * @method static \Illuminate\Database\Eloquent\Builder|Notification newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Notification newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Notification query()
@@ -125,6 +126,7 @@ namespace App{
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereConcernsUserId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Notification wherePath($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereTravelId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Notification whereUserId($value)

@@ -21,7 +21,6 @@ Route::get('/activated', function () {
 });
 
 Route::get('/travels/{id}', 'TravelsController@view');
-Route::get('/generate/{id}', 'TravelsController@generate');
 
 Route::get('facebook/redirect', 'FacebookController@redirect');
 Route::get('facebook/callback', 'FacebookController@callback');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\TravelListResource;
+use App\Jobs\GenerateMemory;
 use App\Photo;
 use App\Travel;
 use App\Http\Resources\TravelResource;
@@ -87,10 +88,9 @@ class TravelsController extends BaseController
 
     public function generate($id)
     {
-        $pdf = new Mpdf();
-        $pdf->WriteHTML($this->view($id)->render());
+        GenerateMemory::dispatch($this->view($id)->render(), Auth::id());
 
-        return $pdf->Output();
+        return $this->sendResponse(null, 'Memory generating has been started');
     }
 
     /**
