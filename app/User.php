@@ -78,12 +78,16 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasManyThrough(Like::class, Travel::class);
     }
 
+    public function getUniqueCountries() {
+        $notesCountries = $this->notes->load('location')->pluck('location.country');
+        $photosCountries = $this->photos->load('location')->pluck('location.country');
+
+        return $notesCountries->merge($photosCountries)->values()->unique();
+    }
+
     public function updateCountriesCountStat()
     {
-        $notesCountries = $this->notes->load('location')->pluck('location.country')->unique();
-        $photosCountries = $this->photos->load('location')->pluck('location.country')->unique();
-
-        $this->stat->countries_count = $notesCountries->union($photosCountries)->count();
+        $this->stat->countries_count = $this->getUniqueCountries()->count();
         $this->stat->save();
     }
 

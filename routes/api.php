@@ -21,6 +21,7 @@ Route::middleware('auth:api')->group( function () {
     Route::resource('users', 'UsersController')
         ->only(['show']);
     Route::get('/users/{target}/stats', 'UsersController@stats');
+    Route::get('/users/{id}/countries', 'UsersController@countries');
 
     Route::get('travels/{type}/{id?}', 'TravelsController@index')
     ->where(['type' => 'home|my|user']);

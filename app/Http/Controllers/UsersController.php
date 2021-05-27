@@ -50,4 +50,11 @@ class UsersController extends BaseController
 
         return $this->sendResponse($stats, 'User statistics');
     }
+
+    public function countries($user_id)
+    {
+        $user = User::findOrFail($user_id);
+
+        return $this->sendResponse($user->getUniqueCountries()->values(), 'Unique countries');
+    }
 }
