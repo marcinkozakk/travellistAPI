@@ -63,7 +63,7 @@
         <div class="photo">
             <h2>{{ $item->title }}</h2>
             <span>{{ \Carbon\Carbon::parse($item->date)->toDateString() }}</span>
-            <img src="{{ Storage::url($item->path) }}">
+            <img src="{{ url(Storage::url($item->path)) }}">
         </div>
     @endif
 @endforeach
