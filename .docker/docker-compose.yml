@@ -1,0 +1,105 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      args:
+        user: marcin
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellist
+    container_name: travellist-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./app:/var/www
+    networks:
+      - travellist
+  horizon:
+    build:
+      args:
+        user: marcin
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellist
+    container_name: travellist-horizon
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./app:/var/www
+    networks:
+      - travellist
+    command: "php artisan horizon"
+  scheduler:
+    build:
+      args:
+        user: marcin
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: travellist
+    container_name: travellist-scheduler
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./app:/var/www
+    networks:
+      - travellist
+    command: "./run-scheduler.sh"
+  db:
+    image: mysql:5.7
+    container_name: travellist-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: travellist
+      MYSQL_ROOT_PASSWORD: root_prndrfsq9493
+      MYSQL_PASSWORD: travellist_olpfds5421
+      MYSQL_USER: travellist_user
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    ports:
+      - 3306:3306
+    networks:
+      - travellist
+  nginx:
+    image: nginx:mainline-alpine
+    container_name: travellist-nginx
+    restart: unless-stopped
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./app:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d
+      - ./docker-compose/certbot-etc:/etc/letsencrypt
+      - ./docker-compose/certbot-var:/var/lib/letsencrypt
+    networks:
+      - travellist
+  redis:
+    image: docker.io/bitnami/redis:6.2
+    container_name: travellist-redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - 6379:6379
+    volumes:
+      - ./docker-compose/redis:/bitnami/redis/data
+    networks:
+      - travellist
+  certbot:
+    image: certbot/certbot
+    container_name: travellist-certbot
+    volumes:
+      - ./docker-compose/certbot-etc:/etc/letsencrypt
+      - ./docker-compose/certbot-var:/var/lib/letsencrypt
+      - ./app:/var/www
+    command: certonly --webroot --webroot-path=/var/www --email marcinkozakk@gmail.com --agree-tos --no-eff-email --force-renewal -d api.travellist.tk
+
+
+networks:
+  travellist:
+    driver: bridge
+
