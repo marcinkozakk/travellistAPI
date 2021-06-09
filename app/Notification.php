@@ -33,12 +33,6 @@ class Notification extends Model
             ]
         ];
 
-        if(!is_null($this->path)) {
-            $data['data'] = [
-                'path' => $this->path
-            ];
-        }
-
         $dataString = json_encode($data);
 
         $headers = [
