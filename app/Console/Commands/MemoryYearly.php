@@ -46,7 +46,6 @@ class MemoryYearly extends Command
 
         $controller = app()->make(TravelsController::class);
 
-        Log::debug($travels->count());
         foreach ($travels as $travel) {
             Log::debug($travel->title);
             GenerateMemory::dispatch(

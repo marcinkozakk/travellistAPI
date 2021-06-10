@@ -21,6 +21,7 @@ class CreateStatsTable extends Migration
             $table->integer('notes_count')->default(0);
             $table->integer('likes_count')->default(0);
             $table->integer('total_travel_time')->default(0);
+            $table->integer('total_points')->default(0);
             $table->timestamps();
 
             $table->unsignedBigInteger('user_id');
