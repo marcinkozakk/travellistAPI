@@ -1,6 +1,6 @@
 # Travellist API
-API for the Travellist application used to save travel memories and share them in a group of friends
-Technologies: PHP, Laravel, Redis, Docker, MySQL
+API for the Travellist application used to save travel memories and share them in a group of friends.
+#### Technologies: PHP, Laravel, Redis, Docker, MySQL
 
 ## About Laravel
 
